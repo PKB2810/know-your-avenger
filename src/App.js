@@ -32,6 +32,7 @@ function App() {
                     return (
                       <AvengerCardView
                         avengerList={context.avengerData}
+                        selectedAvenger={context.selectedAvenger}
                         handleSelectedAvenger={context.handleSelectedAvenger}
                       />
                     );
