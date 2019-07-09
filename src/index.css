@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.listGroupParent, .mediaParent{
+  display: flex ;
+}
+
+.listGroupStyle,.mediaStyle{
+  min-width:"20px"  ;
+   margin:auto;
+   cursor:pointer;
+}
+.selectedAvengerStyle,.selectedAvengerStyle:hover{
+  background-color: aliceblue !important;
+}

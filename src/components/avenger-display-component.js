@@ -1,5 +1,6 @@
-import React from "../../node_modules/react";
+import React from "react";
 import AvengerContext from "../context/avenger-context";
+import ViewChoiceComponent from "./view-choice-component"
 
 class AvengerDisplayComponent extends React.Component{
 
@@ -9,39 +10,36 @@ class AvengerDisplayComponent extends React.Component{
 
     render(){
 
-        return(
-            <section>
+        return (
+          <section>
             <AvengerContext.Consumer>
               {context => (
                 <>
-                  <label>
-                    <input
-                      type="radio"
-                      value="List View"
-                      name="viewType"
-                      checked={context.view ==="List View"}
-                      onChange={e => context.onViewChange(e.target.value)}
-                    />
+                  <ViewChoiceComponent
+                    value="List View"
+                    name="viewType"
+                    checked={context.view === "List View"}
+                    onChangeHandler={context.onViewChange}
+                  >
+                    {" "}
                     List View
-                  </label>
-                  <label>
-                    <input
-                      type="radio"
-                      value="Card View"
-                      name="viewType"
-                      checked={context.view ==="Card View"}
-                      onChange={e => context.onViewChange(e.target.value)}
-                    />
+                  </ViewChoiceComponent>
+                  <ViewChoiceComponent
+                    value="Card View"
+                    name="viewType"
+                    checked={context.view === "Card View"}
+                    onChangeHandler={context.onViewChange}
+                  >
+                    {" "}
                     Card View
-                  </label>
+                  </ViewChoiceComponent>
+
                   {this.props.render()}
                 </>
               )}
-             
             </AvengerContext.Consumer>
           </section>
-  
-        )
+        );
        
 
     }

@@ -13,8 +13,8 @@ class AvengerInfoComponent extends React.Component{
               avenger.avenger_name === this.props.selectedAvenger
           )[0];
           return (
-              <section>
-            <Media>
+              <section >
+            <Media className="mediaParent">
               <Media left href="#">
                 <Media
                   object
@@ -23,7 +23,7 @@ class AvengerInfoComponent extends React.Component{
                   height="500px"
                   alt="Generic placeholder image"
                 />
-              </Media>
+              </Media >
               <Media body>
                 <Media heading>{selectedAvengerObj.avenger_name}</Media>
                 {selectedAvengerObj.avenger_description}

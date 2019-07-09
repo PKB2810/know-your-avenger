@@ -24,6 +24,7 @@ function App() {
                     return (
                       <AvengerListView
                         avengerList={context.avengerData}
+                        selectedAvenger={context.selectedAvenger}
                         handleSelectedAvenger={context.handleSelectedAvenger}
                       />
                     );
