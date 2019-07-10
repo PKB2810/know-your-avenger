@@ -10,4 +10,4 @@ render(){
  
 }
 
-export default LoaderComponent;
+export default LoaderComponent; 

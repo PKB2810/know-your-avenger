@@ -14,13 +14,14 @@ code {
 
 .listGroupParent, .mediaParent{
   display: flex ;
-  max-height:500px;
-    overflow:auto;
+  
 }
 
 .listGroupStyle,.mediaStyle{
   min-width:20px  ;
    margin:auto;
+   max-height:500px;
+    overflow:auto;
    cursor:pointer;
 }
 .selectedAvengerStyle,.selectedAvengerStyle:hover{
