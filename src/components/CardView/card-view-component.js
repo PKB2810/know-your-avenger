@@ -1,14 +1,16 @@
 import React from 'react';
 import CardItemComponent from './card-item-component';
 import LoaderComponent from '../Loader/loader-component';
+import AvengerContext from '../../context/avenger-context';
 
 class AvengerCardComponent extends React.Component {
+  static contextType = AvengerContext;
   render() {
     let className = '';
-    const avengerCardList = this.props.avengerList.map(avenger => {
+    const avengerCardList = this.context.avengerData.map(avenger => {
       if (
-        this.props.selectedAvenger !== null &&
-        this.props.selectedAvenger === avenger.name
+        this.context.selectedAvenger !== null &&
+        this.context.selectedAvenger === avenger.name
       ) {
         className = 'selectedAvengerStyle';
       } else {
@@ -22,17 +24,20 @@ class AvengerCardComponent extends React.Component {
           avengerImage={
             avenger.thumbnail.path + '.' + avenger.thumbnail.extension
           }
-          handleSelectedAvenger={this.props.handleSelectedAvenger}
         />
       );
     });
     return (
-      <section
-        onScroll={e => this.props.handleFetchOnScroll(e)}
-        style={{ maxHeight: '500px', overflow: 'auto' }}>
-        {avengerCardList}
-        {this.props.isLoadingOnScroll && <LoaderComponent />}
-      </section>
+      <AvengerContext.Consumer>
+        {context => (
+          <section
+            onScroll={e => this.context.handleFetchOnScroll(e)}
+            style={{ maxHeight: '500px', overflow: 'auto' }}>
+            {avengerCardList}
+            {this.context.isLoadingOnScroll && <LoaderComponent />}
+          </section>
+        )}
+      </AvengerContext.Consumer>
     );
   }
 }

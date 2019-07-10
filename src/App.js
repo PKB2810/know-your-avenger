@@ -21,34 +21,12 @@ function App() {
                 <AvengerDisplayComponent
                   render={() => {
                     if (context.view === 'List View')
-                      return (
-                        <AvengerListView
-                          avengerList={context.avengerData}
-                          selectedAvenger={context.selectedAvenger}
-                          handleSelectedAvenger={context.handleSelectedAvenger}
-                          handleFetchOnScroll={context.handleFetchOnScroll}
-                          isLoadingOnScroll={context.isLoadingOnScroll}
-                        />
-                      );
-                    else
-                      return (
-                        <AvengerCardView
-                          avengerList={context.avengerData}
-                          selectedAvenger={context.selectedAvenger}
-                          handleSelectedAvenger={context.handleSelectedAvenger}
-                          handleFetchOnScroll={context.handleFetchOnScroll}
-                          isLoadingOnScroll={context.isLoadingOnScroll}
-                        />
-                      );
+                      return <AvengerListView />;
+                    else return <AvengerCardView />;
                   }}
                 />
               )}
-              {context.isLoading === false && (
-                <AvengerInfoComponent
-                  avengerList={context.avengerData}
-                  selectedAvenger={context.selectedAvenger}
-                />
-              )}
+              {context.isLoading === false && <AvengerInfoComponent />}
               {context.isLoading && <LoaderComponent />}
             </>
           )}

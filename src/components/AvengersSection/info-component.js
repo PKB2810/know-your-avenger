@@ -1,10 +1,13 @@
 import React from 'react';
 import { Media } from 'reactstrap';
+import AvengerContext from '../../context/avenger-context';
+
 class AvengerInfoComponent extends React.Component {
+  static contextType = AvengerContext;
   render() {
-    if (this.props.selectedAvenger) {
-      const selectedAvengerObj = this.props.avengerList.filter(
-        avenger => avenger.name === this.props.selectedAvenger
+    if (this.context.selectedAvenger) {
+      const selectedAvengerObj = this.context.avengerData.filter(
+        avenger => avenger.name === this.context.selectedAvenger
       )[0];
       return (
         <section>

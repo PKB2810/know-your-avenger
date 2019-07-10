@@ -3,14 +3,16 @@ import { ListGroup } from 'reactstrap';
 import AvengerImgComponent from '../AvengersSection/img-component';
 import ListItemComponent from './list-item-component';
 import LoaderComponent from '../Loader/loader-component';
+import AvengerContext from '../../context/avenger-context';
 
 class AvengerListView extends React.Component {
+  static contextType = AvengerContext;
   render() {
     let className = '';
-    const avengerList = this.props.avengerList.map(avenger => {
+    const avengerList = this.context.avengerData.map(avenger => {
       if (
-        this.props.selectedAvenger !== null &&
-        this.props.selectedAvenger === avenger.name
+        this.context.selectedAvenger !== null &&
+        this.context.selectedAvenger === avenger.name
       ) {
         className = 'selectedAvengerStyle';
       } else {
@@ -21,8 +23,7 @@ class AvengerListView extends React.Component {
         <ListItemComponent
           className={className}
           avengerId={avenger.id}
-          avengerName={avenger.name}
-          handleSelectedAvenger={this.props.handleSelectedAvenger}>
+          avengerName={avenger.name}>
           <AvengerImgComponent
             src={avenger.thumbnail.path + '.' + avenger.thumbnail.extension}
             width="80px"
@@ -35,14 +36,18 @@ class AvengerListView extends React.Component {
     });
 
     return (
-      <section className="listGroupParent">
-        <ListGroup
-          onScroll={e => this.props.handleFetchOnScroll(e)}
-          className="listGroupStyle">
-          {avengerList}
-          {this.props.isLoadingOnScroll && <LoaderComponent />}
-        </ListGroup>
-      </section>
+      <AvengerContext.Consumer>
+        {context => (
+          <section className="listGroupParent">
+            <ListGroup
+              onScroll={e => context.handleFetchOnScroll(e)}
+              className="listGroupStyle">
+              {avengerList}
+              {context.isLoadingOnScroll && <LoaderComponent />}
+            </ListGroup>
+          </section>
+        )}
+      </AvengerContext.Consumer>
     );
   }
 }

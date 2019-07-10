@@ -1,14 +1,17 @@
 import React from 'react';
 import { Card, CardImg, CardBody, CardTitle } from 'reactstrap';
+import AvengerContext from '../../context/avenger-context';
 
 class CardItemComponent extends React.Component {
+  static contextType = AvengerContext;
+
   render() {
     return (
       <div className="cardParentStyle">
         <Card
           key={this.props.avengerId}
           onClick={() =>
-            this.props.handleSelectedAvenger(this.props.avengerName)
+            this.context.handleSelectedAvenger(this.props.avengerName)
           }>
           <CardImg
             top
