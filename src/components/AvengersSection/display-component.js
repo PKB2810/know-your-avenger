@@ -1,12 +1,8 @@
 import React from "react";
-import AvengerContext from "../context/avenger-context";
-import ViewChoiceComponent from "./view-choice-component"
+import AvengerContext from "../../context/avenger-context";
+import ViewChoiceComponent from "../ViewChoice/view-choice-component"
 
 class AvengerDisplayComponent extends React.Component{
-
-    constructor(props){
-        super(props);
-    }
 
     render(){
 

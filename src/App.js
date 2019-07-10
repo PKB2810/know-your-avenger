@@ -1,13 +1,12 @@
-import React from '../node_modules/react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-import HeaderComponent from "./components/header-component";
+import HeaderComponent from "./components/Header/header-component";
 import AvengerContext from "./context/avenger-context";
-import AvengerProvider from "./components/avenger-provider-component";
-import AvengerDisplayComponent from "./components/avenger-display-component";
-import AvengerInfoComponent from './components/avenger-info-component';
-import AvengerListView from "./components/avenger-list-view-component";
-import AvengerCardView from "./components/avenger-card-component";
+import AvengerProvider from "./components/AvengersSection/provider-component";
+import AvengerDisplayComponent from "./components/AvengersSection/display-component";
+import AvengerInfoComponent from './components/AvengersSection/info-component';
+import AvengerListView from "./components/ListView/list-view-component";
+import AvengerCardView from "./components/CardView/card-view-component";
 
 
 function App() {
@@ -16,7 +15,7 @@ function App() {
       <HeaderComponent />
       <AvengerProvider>
         <AvengerContext.Consumer>
-          {context => (
+          {(context) => (
             <>
               <AvengerDisplayComponent
                 render={() => {

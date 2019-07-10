@@ -1,5 +1,5 @@
-import React from "../../node_modules/react";
-import AvengerContext from "../context/avenger-context";
+import React from "react";
+import AvengerContext from "../../context/avenger-context";
 
 class AvengerProvider extends React.Component {
         constructor(props){

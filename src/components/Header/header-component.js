@@ -1,4 +1,4 @@
-import React from "../../node_modules/react";
+import React from "react";
 
 class HeaderComponent extends React.Component {
   render() {

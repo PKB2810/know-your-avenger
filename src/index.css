@@ -17,10 +17,16 @@ code {
 }
 
 .listGroupStyle,.mediaStyle{
-  min-width:"20px"  ;
+  min-width:20px  ;
    margin:auto;
    cursor:pointer;
 }
 .selectedAvengerStyle,.selectedAvengerStyle:hover{
   background-color: aliceblue !important;
 }
+
+.cardParentStyle{
+  width:200px;
+display:inline-block;
+} 
+

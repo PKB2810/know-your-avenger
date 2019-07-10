@@ -2,10 +2,6 @@ import React from "react";
 import {Media} from "reactstrap";
 class AvengerInfoComponent extends React.Component{
 
-    constructor(props){
-        super(props);
-    }
-
     render(){
         if (this.props.selectedAvenger) {
           const selectedAvengerObj = this.props.avengerList.filter(
@@ -21,7 +17,7 @@ class AvengerInfoComponent extends React.Component{
                   src={selectedAvengerObj.avenger_image}
                   width="500px"
                   height="500px"
-                  alt="Generic placeholder image"
+                  alt="avenger"
                 />
               </Media >
               <Media body>
