@@ -8,7 +8,7 @@ class AvengerListView extends React.Component{
     render(){
         let className="";
         const avengerList = this.props.avengerList.map((avenger) => {
-            if(this.props.selectedAvenger!== null && this.props.selectedAvenger===avenger.avenger_name){
+            if(this.props.selectedAvenger!== null && this.props.selectedAvenger===avenger.name){
                 className="selectedAvengerStyle";
             }else{
                 className=""
@@ -17,19 +17,19 @@ class AvengerListView extends React.Component{
                 return (
                   <ListItemComponent
                     className={className}
-                    avengerId={avenger.avenger_id}
-                    avengerName={avenger.avenger_name}
+                    avengerId={avenger.id}
+                    avengerName={avenger.name}
                     handleSelectedAvenger={
                       this.props.handleSelectedAvenger
                     }
                   >
                     <AvengerImgComponent
-                      src={avenger.avenger_list_image}
+                      src={avenger.thumbnail.path +"."+ avenger.thumbnail.extension}
                       width="80px"
                       height="80px"
                       style={{ borderRadius: "50%" }}
                     />
-                    {avenger.avenger_name}
+                    {avenger.name}
                   </ListItemComponent>
                 );
 

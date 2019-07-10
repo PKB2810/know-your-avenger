@@ -6,7 +6,7 @@ class AvengerInfoComponent extends React.Component{
         if (this.props.selectedAvenger) {
           const selectedAvengerObj = this.props.avengerList.filter(
             avenger =>
-              avenger.avenger_name === this.props.selectedAvenger
+              avenger.name === this.props.selectedAvenger
           )[0];
           return (
               <section >
@@ -14,15 +14,15 @@ class AvengerInfoComponent extends React.Component{
               <Media left href="#">
                 <Media
                   object
-                  src={selectedAvengerObj.avenger_image}
+                  src={ selectedAvengerObj.thumbnail.path + "."+selectedAvengerObj.thumbnail.extension}
                   width="500px"
                   height="500px"
                   alt="avenger"
                 />
               </Media >
               <Media body>
-                <Media heading>{selectedAvengerObj.avenger_name}</Media>
-                {selectedAvengerObj.avenger_description}
+                <Media heading>{selectedAvengerObj.name}</Media>
+                {selectedAvengerObj.description}
               </Media>
             </Media>
             </section>

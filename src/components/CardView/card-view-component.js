@@ -13,7 +13,7 @@ class AvengerCardComponent extends React.Component{
                                      null &&
                                    this.props
                                      .selectedAvenger ===
-                                     avenger.avenger_name
+                                     avenger.name
                                  ) {
                                    className =
                                      "selectedAvengerStyle";
@@ -22,27 +22,38 @@ class AvengerCardComponent extends React.Component{
                                      "";
                                  }
                                  return (
-                                   <CardItemComponent
-                                   className={className}
-                                     avengerId={
-                                       avenger.avenger_id
-                                     }
-                                     avengerName={
-                                       avenger.avenger_name
-                                     }
-                                     avengerImage={
-                                       avenger.avenger_image
-                                     }
-                                     handleSelectedAvenger={
-                                       this
-                                         .props
-                                         .handleSelectedAvenger
-                                     }
-                                   />
+                                   
+                                     <CardItemComponent
+                                       className={
+                                         className +
+                                         " cardBodyStyle"
+                                       }
+                                       avengerId={
+                                         avenger.id
+                                       }
+                                       avengerName={
+                                         avenger.name
+                                       }
+                                       avengerImage={
+                                         avenger
+                                           .thumbnail
+                                           .path +
+                                         "." +
+                                         avenger
+                                           .thumbnail
+                                           .extension
+                                       }
+                                       handleSelectedAvenger={
+                                         this
+                                           .props
+                                           .handleSelectedAvenger
+                                       }
+                                     />
+                                   
                                  );
                                }
                   );
-                  return <section  >{avengerCardList}</section>;
+                  return <section style={{maxHeight:"500px",overflow:"auto"}} >{avengerCardList}</section>;
                 }
 
 }

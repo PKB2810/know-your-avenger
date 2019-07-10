@@ -7,6 +7,7 @@ import AvengerDisplayComponent from "./components/AvengersSection/display-compon
 import AvengerInfoComponent from './components/AvengersSection/info-component';
 import AvengerListView from "./components/ListView/list-view-component";
 import AvengerCardView from "./components/CardView/card-view-component";
+import LoaderComponent from "./components/Loader/loader-component";
 
 
 function App() {
@@ -17,30 +18,43 @@ function App() {
         <AvengerContext.Consumer>
           {(context) => (
             <>
-              <AvengerDisplayComponent
+            {  context.isLoading === false &&  <AvengerDisplayComponent
                 render={() => {
-                  if (context.view === "List View")
+                  if (
+                  
+                    context.view === "List View"
+                  )
                     return (
                       <AvengerListView
                         avengerList={context.avengerData}
-                        selectedAvenger={context.selectedAvenger}
-                        handleSelectedAvenger={context.handleSelectedAvenger}
+                        selectedAvenger={
+                          context.selectedAvenger
+                        }
+                        handleSelectedAvenger={
+                          context.handleSelectedAvenger
+                        }
                       />
                     );
                   else
                     return (
                       <AvengerCardView
                         avengerList={context.avengerData}
-                        selectedAvenger={context.selectedAvenger}
-                        handleSelectedAvenger={context.handleSelectedAvenger}
+                        selectedAvenger={
+                          context.selectedAvenger
+                        }
+                        handleSelectedAvenger={
+                          context.handleSelectedAvenger
+                        }
                       />
                     );
                 }}
-              />
-              <AvengerInfoComponent
+              />} 
+               {context.isLoading===false &&  <AvengerInfoComponent
                 avengerList={context.avengerData}
                 selectedAvenger={context.selectedAvenger}
-              />
+              />}
+                {context.isLoading && <LoaderComponent/>}
+               
             </>
           )}
         </AvengerContext.Consumer>

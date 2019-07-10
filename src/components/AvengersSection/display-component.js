@@ -1,16 +1,17 @@
 import React from "react";
 import AvengerContext from "../../context/avenger-context";
-import ViewChoiceComponent from "../ViewChoice/view-choice-component"
+import ViewChoiceComponent from "../ViewChoice/view-choice-component";
 
 class AvengerDisplayComponent extends React.Component{
 
     render(){
-
+      
         return (
           <section>
             <AvengerContext.Consumer>
               {context => (
                 <>
+                  
                   <ViewChoiceComponent
                     value="List View"
                     name="viewType"
@@ -29,7 +30,7 @@ class AvengerDisplayComponent extends React.Component{
                     {" "}
                     Card View
                   </ViewChoiceComponent>
-
+                  
                   {this.props.render()}
                 </>
               )}
