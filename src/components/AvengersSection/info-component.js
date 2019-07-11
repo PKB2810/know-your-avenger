@@ -39,7 +39,9 @@ class AvengerInfoComponent extends React.Component {
                   alt={selectedAvengerObj.name}
                 />
                 <Description className="avengerModalDescription">
-                  {selectedAvengerObj.description}
+                  {selectedAvengerObj.description.trim() === ''
+                    ? 'No information available'
+                    : selectedAvengerObj.description}
                 </Description>
               </div>
             </Modal.Body>
