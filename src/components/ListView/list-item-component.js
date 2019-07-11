@@ -8,7 +8,7 @@ class ListItemComponent extends React.Component {
   render() {
     return (
       <ListGroupItem
-        className={this.props.className}
+        className={'listItemStyle ' + this.props.className}
         key={this.props.avengerId}
         onClick={() =>
           this.context.handleSelectedAvenger(this.props.avengerName)
