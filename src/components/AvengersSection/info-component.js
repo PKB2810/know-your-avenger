@@ -2,22 +2,19 @@ import React from 'react';
 import { Media } from 'reactstrap';
 import AvengerContext from '../../context/avenger-context';
 import { Modal } from 'react-bootstrap';
-
+import AvengerImgComponent from '../AvengersSection/img-component';
+import Description from '../Description/description-component';
 class AvengerInfoComponent extends React.Component {
   static contextType = AvengerContext;
   constructor(props) {
     super(props);
-    this.state = { show: undefined };
+    this.state = { show: false };
   }
-  componentDidMount() {
-    this.setState({ show: true });
-  }
+
   handleClose = () => {
-    this.setState({ show: false });
+    this.context.handleSelectedAvenger(null);
   };
-  componentWillUnmount() {
-    this.setState({ show: true });
-  }
+
   render() {
     if (this.context.selectedAvenger) {
       const selectedAvengerObj = this.context.avengerData.filter(
@@ -25,27 +22,26 @@ class AvengerInfoComponent extends React.Component {
       )[0];
       return (
         <section>
-          <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal show={!this.state.show} onHide={this.handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>{selectedAvengerObj.name}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Media className="mediaParent">
-                <Media left href="#">
-                  <Media
-                    object
-                    src={
-                      selectedAvengerObj.thumbnail.path +
-                      '.' +
-                      selectedAvengerObj.thumbnail.extension
-                    }
-                    width="500px"
-                    height="500px"
-                    alt="avenger"
-                  />
-                </Media>
-                <Media body>{selectedAvengerObj.description}</Media>
-              </Media>
+              <div className="mediaParent">
+                <AvengerImgComponent
+                  src={
+                    selectedAvengerObj.thumbnail.path +
+                    '.' +
+                    selectedAvengerObj.thumbnail.extension
+                  }
+                  width="80px"
+                  height="80px"
+                  alt={selectedAvengerObj.name}
+                />
+                <Description className="avengerModalDescription">
+                  {selectedAvengerObj.description}
+                </Description>
+              </div>
             </Modal.Body>
           </Modal>
         </section>

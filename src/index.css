@@ -12,15 +12,17 @@ code {
     monospace;
 }
 
-.listGroupParent,
-.mediaParent {
+.listGroupParent {
   display: flex;
 }
-.listGroupParent,
-.mediaParent {
+.listGroupParent {
   display: flex;
   justify-content: center;
 }
+/* .mediaParent {
+  display: flex;
+  justify-content: space-between;
+} */
 
 .listGroupStyle,
 .mediaStyle {
@@ -32,6 +34,10 @@ code {
 .listItemStyle {
   display: flex !important;
   justify-content: space-between;
+}
+.avengerModalDescription {
+  max-height: 500px;
+  overflow: scroll;
 }
 
 .listGroupStyle,
@@ -55,3 +61,6 @@ code {
 .cardBodyStyle {
   height: 20px;
 }
+/* .mediaParent {
+  min-width: 300px;
+} */
