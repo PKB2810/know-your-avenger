@@ -7,6 +7,7 @@ import AvengerDisplayComponent from './components/AvengersSection/display-compon
 import AvengerInfoComponent from './components/AvengersSection/info-component';
 import AvengerListView from './components/ListView/list-view-component';
 import AvengerCardView from './components/CardView/card-view-component';
+import CarouselViewComponent from './components/CarouselView/carousel-view-component';
 import LoaderComponent from './components/Loader/loader-component';
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
                   render={() => {
                     if (context.view === 'List View')
                       return <AvengerListView />;
-                    else return <AvengerCardView />;
+                    else return <CarouselViewComponent />;
                   }}
                 />
               )}

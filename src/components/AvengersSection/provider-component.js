@@ -10,7 +10,9 @@ class AvengerProvider extends React.Component {
       isLoading: true,
       isLoadingOnScroll: false,
       offset: 0,
-      avengers: []
+      limit: 20,
+      avengers: [],
+      avengersCarousel: []
     };
   }
   componentDidMount() {
@@ -23,6 +25,7 @@ class AvengerProvider extends React.Component {
           console.log(result);
           this.setState({
             avengers: result.data.results,
+            avengersCarousel: result.data.results,
             isLoading: false,
             offset: this.state.offset + result.data.limit
           });
@@ -32,6 +35,28 @@ class AvengerProvider extends React.Component {
         }
       );
   }
+  fetchDataOnCarouselSlide = () => {
+    const offset = this.state.offset - 1;
+    fetch(
+      'https://gateway.marvel.com:443/v1/public/characters?apikey=63ed80dab91bb44381fc80ef363acde5&limit=' +
+        this.state.limit +
+        '&offset=' +
+        offset
+    )
+      .then(res => res.json())
+      .then(
+        result => {
+          console.log(result);
+          this.setState({
+            avengersCarousel: result.data.results,
+            offset: this.state.offset + result.data.limit
+          });
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  };
 
   fetchDataOnScroll = e => {
     const elem = e.target;
@@ -78,11 +103,13 @@ class AvengerProvider extends React.Component {
           view: this.state.view,
           selectedAvenger: this.state.selectedAvenger,
           avengerData: this.state.avengers,
+          avengersCarousel: this.state.avengersCarousel,
           onViewChange: this.onViewChange,
           isLoading: this.state.isLoading,
           isLoadingOnScroll: this.state.isLoadingOnScroll,
           handleSelectedAvenger: this.handleSelectedAvenger,
-          handleFetchOnScroll: this.fetchDataOnScroll
+          handleFetchOnScroll: this.fetchDataOnScroll,
+          fetchDataOnCarouselSlide: this.fetchDataOnCarouselSlide
         }}>
         {this.props.children}
       </AvengerContext.Provider>
