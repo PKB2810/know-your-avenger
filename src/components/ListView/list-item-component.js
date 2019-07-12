@@ -1,21 +1,24 @@
 import React from 'react';
 import { ListGroupItem } from 'reactstrap';
 import AvengerContext from '../../context/avenger-context';
+import { provideContext } from '../provideContextHOC';
 
 class ListItemComponent extends React.Component {
   static contextType = AvengerContext;
-
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <ListGroupItem
         className={'listItemStyle ' + this.props.className}
         key={this.props.avengerId}
         onClick={() =>
-          this.context.handleSelectedAvenger(this.props.avengerName)
+          this.props.handleSelectedAvenger(this.props.avengerName)
         }>
         {this.props.children}
       </ListGroupItem>
     );
   }
 }
-export default ListItemComponent;
+export default provideContext(ListItemComponent);

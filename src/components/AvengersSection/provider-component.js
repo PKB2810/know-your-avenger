@@ -1,5 +1,7 @@
 import React from 'react';
 import AvengerContext from '../../context/avenger-context';
+import { API_URL } from '../../constants/api-url';
+import { API_KEY } from '../../constants/api-public-key';
 
 class AvengerProvider extends React.Component {
   constructor(props) {
@@ -14,17 +16,20 @@ class AvengerProvider extends React.Component {
     };
   }
   componentDidMount() {
-    fetch(
-      'https://gateway.marvel.com:443/v1/public/characters?apikey=63ed80dab91bb44381fc80ef363acde5'
-    )
+    this.fetchData();
+  }
+
+  fetchData(offset = 0, isLoading = false, isLoadingOnScroll = false) {
+    fetch(API_URL + '?apikey=' + API_KEY + '&offset=' + offset)
       .then(res => res.json())
       .then(
         result => {
           console.log(result);
           this.setState({
-            avengers: result.data.results,
-            isLoading: false,
-            offset: this.state.offset + result.data.limit
+            isLoadingOnScroll: isLoadingOnScroll,
+            avengers: this.state.avengers.concat(result.data.results),
+            isLoading: isLoading,
+            offset: offset + result.data.limit
           });
         },
         error => {
@@ -36,25 +41,8 @@ class AvengerProvider extends React.Component {
   fetchDataOnScroll = e => {
     const elem = e.target;
     if (elem.scrollHeight - elem.scrollTop === elem.clientHeight) {
-      this.setState({ isLoadingOnScroll: true }, function() {
-        fetch(
-          'https://gateway.marvel.com:443/v1/public/characters?apikey=63ed80dab91bb44381fc80ef363acde5&offset=' +
-            this.state.offset
-        )
-          .then(res => res.json())
-          .then(
-            result => {
-              console.log(result);
-              this.setState({
-                avengers: this.state.avengers.concat(result.data.results),
-                isLoadingOnScroll: false,
-                offset: this.state.offset + result.data.limit
-              });
-            },
-            error => {
-              console.log(error);
-            }
-          );
+      this.setState({ isLoadingOnScroll: true }, () => {
+        this.fetchData(this.state.offset);
       });
     } else {
       return;

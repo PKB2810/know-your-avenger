@@ -2,6 +2,7 @@ import React from 'react';
 import CardItemComponent from './card-item-component';
 import LoaderComponent from '../Loader/loader-component';
 import AvengerContext from '../../context/avenger-context';
+import { provideContext } from '../provideContextHOC';
 
 class AvengerCardComponent extends React.Component {
   static contextType = AvengerContext;
@@ -28,18 +29,14 @@ class AvengerCardComponent extends React.Component {
       );
     });
     return (
-      <AvengerContext.Consumer>
-        {context => (
-          <section
-            onScroll={e => this.context.handleFetchOnScroll(e)}
-            style={{ maxHeight: '500px', overflow: 'auto' }}>
-            {avengerCardList}
-            {this.context.isLoadingOnScroll && <LoaderComponent />}
-          </section>
-        )}
-      </AvengerContext.Consumer>
+      <section
+        onScroll={e => this.props.handleFetchOnScroll(e)}
+        style={{ maxHeight: '500px', overflow: 'auto' }}>
+        {avengerCardList}
+        {this.props.isLoadingOnScroll && <LoaderComponent />}
+      </section>
     );
   }
 }
 
-export default AvengerCardComponent;
+export default provideContext(AvengerCardComponent);

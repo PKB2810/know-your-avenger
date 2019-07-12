@@ -1,5 +1,4 @@
 import React from 'react';
-import { Media } from 'reactstrap';
 import AvengerContext from '../../context/avenger-context';
 import { Modal } from 'react-bootstrap';
 import AvengerImgComponent from '../AvengersSection/img-component';
@@ -39,7 +38,9 @@ class AvengerInfoComponent extends React.Component {
                   alt={selectedAvengerObj.name}
                 />
                 <Description className="avengerModalDescription">
-                  {selectedAvengerObj.description}
+                  {selectedAvengerObj.description === ''
+                    ? 'No information available'
+                    : selectedAvengerObj.description}
                 </Description>
               </div>
             </Modal.Body>

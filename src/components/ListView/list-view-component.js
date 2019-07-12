@@ -4,9 +4,13 @@ import AvengerImgComponent from '../AvengersSection/img-component';
 import ListItemComponent from './list-item-component';
 import LoaderComponent from '../Loader/loader-component';
 import AvengerContext from '../../context/avenger-context';
+import { provideContext } from '../provideContextHOC';
 
 class AvengerListView extends React.Component {
   static contextType = AvengerContext;
+  constructor(props) {
+    super(props);
+  }
   render() {
     let className = '';
     const avengerList = this.context.avengerData.map(avenger => {
@@ -36,19 +40,15 @@ class AvengerListView extends React.Component {
     });
 
     return (
-      <AvengerContext.Consumer>
-        {context => (
-          <section className="listGroupParent">
-            <ListGroup
-              onScroll={e => context.handleFetchOnScroll(e)}
-              className="listGroupStyle">
-              {avengerList}
-              {context.isLoadingOnScroll && <LoaderComponent />}
-            </ListGroup>
-          </section>
-        )}
-      </AvengerContext.Consumer>
+      <section className="listGroupParent">
+        <ListGroup
+          onScroll={e => this.props.handleFetchOnScroll(e)}
+          className="listGroupStyle">
+          {avengerList}
+          {this.props.isLoadingOnScroll && <LoaderComponent />}
+        </ListGroup>
+      </section>
     );
   }
 }
-export default AvengerListView;
+export default provideContext(AvengerListView);
