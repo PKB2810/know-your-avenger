@@ -5,7 +5,7 @@ import Description from '../../Description';
 import provideContext from '../../provideContextHOC';
 
 function AvengerInfoComponent(props) {
-  const [show, setShow] = useState(false);
+  const [show] = useState(false);
 
   function handleClose() {
     props.handleSelectedAvenger(null);
@@ -44,7 +44,7 @@ function AvengerInfoComponent(props) {
       </section>
     );
   } else {
-    return <section>Click on any of the Avengers for further details.</section>;
+    return null;
   }
 }
 export default provideContext(AvengerInfoComponent);

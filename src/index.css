@@ -44,7 +44,7 @@ code {
 .mediaStyle {
   min-width: 20px;
   margin: auto;
-  max-height: 500px;
+  max-height: 40%x;
   overflow: auto;
   cursor: pointer;
   border: 1px solid black;
