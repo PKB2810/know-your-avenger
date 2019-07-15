@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardImg, CardBody, CardTitle } from 'reactstrap';
-import AvengerContext from '../../context/avenger-context';
+import AvengerContext from '../../../context/avenger-context';
 
 class CardItemComponent extends React.Component {
   static contextType = AvengerContext;
@@ -20,7 +20,9 @@ class CardItemComponent extends React.Component {
             src={this.props.avengerImage}
           />
           <CardBody className={this.props.className}>
-            <CardTitle>{this.props.avengerName}</CardTitle>
+            <CardTitle className="textStyle">
+              {this.props.avengerName}
+            </CardTitle>
           </CardBody>
         </Card>
       </div>

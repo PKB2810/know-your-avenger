@@ -1,6 +1,6 @@
 import React from 'react';
-import CardItemComponent from './card-item-component';
-import LoaderComponent from '../Loader/loader-component';
+import CardItemComponent from './CardItem';
+import LoaderComponent from '../Loader';
 import AvengerContext from '../../context/avenger-context';
 import { provideContext } from '../provideContextHOC';
 
@@ -30,7 +30,7 @@ class AvengerCardComponent extends React.Component {
     });
     return (
       <section
-        onScroll={e => this.props.handleFetchOnScroll(e)}
+        onScroll={this.props.handleFetchOnScroll}
         style={{ maxHeight: '500px', overflow: 'auto' }}>
         {avengerCardList}
         {this.props.isLoadingOnScroll && <LoaderComponent />}

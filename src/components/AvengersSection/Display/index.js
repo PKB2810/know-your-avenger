@@ -1,5 +1,5 @@
 import React from 'react';
-import ViewChoiceComponent from '../ViewChoice/view-choice-component';
+import ViewChoiceComponent from '../../ViewChoice';
 
 class AvengerDisplayComponent extends React.Component {
   render() {

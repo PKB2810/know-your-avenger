@@ -1,16 +1,19 @@
 import React from 'react';
 import './App.css';
-import HeaderComponent from './components/Header/header-component';
-import AvengerProvider from './components/AvengersSection/provider-component';
-import MainComponent from './components/Main/main-component';
+import HeaderComponent from './components/Header';
+import AvengerProvider from './components/AvengersSection/Provider';
+import MainComponent from './components/Main';
+import ErrorBoundary from './components/ErrorBoundary';
 
 function App() {
   return (
     <section className="App">
       <HeaderComponent />
-      <AvengerProvider>
-        <MainComponent />
-      </AvengerProvider>
+      <ErrorBoundary>
+        <AvengerProvider>
+          <MainComponent />
+        </AvengerProvider>
+      </ErrorBoundary>
     </section>
   );
 }

@@ -1,13 +1,11 @@
 import React from 'react';
 import { ListGroupItem } from 'reactstrap';
-import AvengerContext from '../../context/avenger-context';
-import { provideContext } from '../provideContextHOC';
+import AvengerContext from '../../../context/avenger-context';
+import { provideContext } from '../../provideContextHOC';
 
 class ListItemComponent extends React.Component {
   static contextType = AvengerContext;
-  constructor(props) {
-    super(props);
-  }
+
   render() {
     return (
       <ListGroupItem

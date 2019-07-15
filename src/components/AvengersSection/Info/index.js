@@ -1,8 +1,8 @@
 import React from 'react';
-import AvengerContext from '../../context/avenger-context';
+import AvengerContext from '../../../context/avenger-context';
 import { Modal } from 'react-bootstrap';
-import AvengerImgComponent from '../AvengersSection/img-component';
-import Description from '../Description/description-component';
+import AvengerImgComponent from '../Image';
+import Description from '../../Description';
 class AvengerInfoComponent extends React.Component {
   static contextType = AvengerContext;
   constructor(props) {

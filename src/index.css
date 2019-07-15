@@ -54,8 +54,11 @@ code {
 }
 
 .cardParentStyle {
-  width: 200px;
+  max-width: 200px;
   display: inline-block;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space:nowwrap;
 }
 
 .cardBodyStyle {
@@ -64,3 +67,9 @@ code {
 /* .mediaParent {
   min-width: 300px;
 } */
+.textStyle{
+  max-width: inherit;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

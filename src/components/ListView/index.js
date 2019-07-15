@@ -1,16 +1,14 @@
 import React from 'react';
 import { ListGroup } from 'reactstrap';
-import AvengerImgComponent from '../AvengersSection/img-component';
-import ListItemComponent from './list-item-component';
-import LoaderComponent from '../Loader/loader-component';
+import AvengerImgComponent from '../AvengersSection/Image';
+import ListItemComponent from './ListItem';
+import LoaderComponent from '../Loader';
 import AvengerContext from '../../context/avenger-context';
 import { provideContext } from '../provideContextHOC';
 
 class AvengerListView extends React.Component {
   static contextType = AvengerContext;
-  constructor(props) {
-    super(props);
-  }
+
   render() {
     let className = '';
     const avengerList = this.context.avengerData.map(avenger => {
@@ -42,7 +40,7 @@ class AvengerListView extends React.Component {
     return (
       <section className="listGroupParent">
         <ListGroup
-          onScroll={e => this.props.handleFetchOnScroll(e)}
+          onScroll={this.props.handleFetchOnScroll}
           className="listGroupStyle">
           {avengerList}
           {this.props.isLoadingOnScroll && <LoaderComponent />}
