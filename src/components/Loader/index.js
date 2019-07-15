@@ -1,13 +1,6 @@
-import React from "react";
+import React from 'react';
 
-
-class LoaderComponent extends React.Component{
-render(){
-
-    return(<div>Loading...</div>);
-
+function LoaderComponent(props) {
+  return <div>Loading...</div>;
 }
- 
-}
-
-export default LoaderComponent; 
+export default LoaderComponent;

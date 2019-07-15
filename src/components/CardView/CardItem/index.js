@@ -1,33 +1,20 @@
 import React from 'react';
 import { Card, CardImg, CardBody, CardTitle } from 'reactstrap';
-import AvengerContext from '../../../context/avenger-context';
+import { provideContext } from '../../provideContextHOC';
 
-class CardItemComponent extends React.Component {
-  static contextType = AvengerContext;
-
-  render() {
-    return (
-      <div className="cardParentStyle">
-        <Card
-          key={this.props.avengerId}
-          onClick={() =>
-            this.context.handleSelectedAvenger(this.props.avengerName)
-          }>
-          <CardImg
-            top
-            width="20px"
-            height="200px"
-            src={this.props.avengerImage}
-          />
-          <CardBody className={this.props.className}>
-            <CardTitle className="textStyle">
-              {this.props.avengerName}
-            </CardTitle>
-          </CardBody>
-        </Card>
-      </div>
-    );
-  }
+function CardItemComponent(props) {
+  return (
+    <div className="cardParentStyle">
+      <Card
+        key={props.avengerId}
+        onClick={() => props.handleSelectedAvenger(props.avengerName)}>
+        <CardImg top width="20px" height="200px" src={props.avengerImage} />
+        <CardBody className={props.className}>
+          <CardTitle className="textStyle">{props.avengerName}</CardTitle>
+        </CardBody>
+      </Card>
+    </div>
+  );
 }
 
-export default CardItemComponent;
+export default provideContext(CardItemComponent);

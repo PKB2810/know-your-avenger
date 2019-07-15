@@ -6,21 +6,20 @@ import AvengerListView from '../ListView';
 import AvengerCardView from '../CardView';
 import LoaderComponent from '../Loader';
 
-class MainComponent extends React.Component {
-  render() {
-    return (
-      <>
-        {!this.props.isLoading && (
-          <AvengerDisplayComponent
-            render={() => {
-              if (this.props.view === 'List View') return <AvengerListView />;
-              else return <AvengerCardView />;
-            }}
-          />
-        )}
-        {!this.props.isLoading ? <AvengerInfoComponent /> : <LoaderComponent />}
-      </>
-    );
-  }
+function MainComponent(props) {
+  return (
+    <>
+      {!props.isLoading && (
+        <AvengerDisplayComponent
+          render={() => {
+            if (props.view === 'List View') return <AvengerListView />;
+            else return <AvengerCardView />;
+          }}
+        />
+      )}
+      {!props.isLoading ? <AvengerInfoComponent /> : <LoaderComponent />}
+    </>
+  );
 }
+
 export default provideContext(MainComponent);
