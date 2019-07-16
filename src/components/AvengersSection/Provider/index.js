@@ -11,51 +11,53 @@ function AvengerProvider(props) {
   const [error, setError] = useState(null);
   const [offset, setOffset] = useState(0);
 
+
   //this effect acts as componentDidMount
   useEffect(() => {
-    fetchData()
-      .then(res => res.json())
-      .then(
+    fetchData().then(result => {
+      console.log(result);
+      if (result.code === 200) {
+        setData(result);
+      } else {
+        setError(result.code + ':' + result.status);
+      }
+    });
+  }, []);
+  //this effect fetches data only when isLoadingOnScroll=true
+  useEffect(() => {
+    if (isLoadingOnScroll)
+      fetchData(offset).then(
         result => {
-          console.log(result);
           if (result.code === 200) {
-            setIsLoadingOnScroll(false);
-            setAvengers(avengers => avengers.concat(result.data.results));
-            setIsLoading(false);
-            setOffset(offset => offset + result.data.limit);
+           setData(result);
           } else {
             setError(result.code + ':' + result.status);
           }
         },
         error => {
-          throw new Error(error);
+          setError(error);
         }
       );
-  }, []);
-  //this effect fetches data only when isLoadingOnScroll=true
-  useEffect(() => {
-    if (isLoadingOnScroll)
-      fetchData(offset)
-        .then(res => res.json())
-        .then(
-          result => {
-            if (result.code === 200) {
-              setIsLoadingOnScroll(false);
-              setAvengers(avengers => avengers.concat(result.data.results));
-              setIsLoading(false);
-              setOffset(offset => offset + result.data.limit);
-            } else {
-              setError(result.code + ':' + result.status);
-            }
-          },
-          error => {
-            setError(error);
-          }
-        );
-  }, [isLoadingOnScroll]);
+  }, [isLoadingOnScroll, offset]);
 
-  function fetchData(offset = 0) {
-    return fetch(API_URL + '?apikey=' + API_KEY + '&offset=' + offset);
+  async function fetchData(offset = 0) {
+    try {
+      const response = await fetch(
+        API_URL + '?apikey=' + API_KEY + '&offset=' + offset
+      );
+      const jsonResponse = await response.json();
+      return jsonResponse;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  function setData(result){
+
+    setIsLoadingOnScroll(false);
+    setAvengers(avengers => avengers.concat(result.data.results));
+    setIsLoading(false);
+    setOffset(offset => offset + result.data.limit);
   }
 
   function fetchDataOnScroll(e) {
