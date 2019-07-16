@@ -3,7 +3,7 @@ import ViewChoiceComponent from '../../ViewChoice';
 
 function AvengerDisplayComponent(props) {
   return (
-    <section>
+    <section className="displayComponentStyle">
       <ViewChoiceComponent value="List View" name="viewType">
         {' '}
         List View

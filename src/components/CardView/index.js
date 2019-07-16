@@ -7,7 +7,7 @@ function AvengerCardComponent(props) {
   return (
     <section
       onScroll={props.handleFetchOnScroll}
-      style={{ maxHeight: '70%', overflow: 'auto' }}>
+      style={{ maxHeight: '100%', overflow: 'auto' }}>
       {props.avengerData.map(avenger => {
         return (
           <CardItemComponent

@@ -3,7 +3,7 @@ import AvengerContext from '../../../context/avenger-context';
 import { API_KEY, API_URL } from '../../../constants';
 
 function AvengerProvider(props) {
-  const [view, setView] = useState('Card View');
+  const [view, setView] = useState('List View');
   const [selectedAvenger, setSelectedAvenger] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingOnScroll, setIsLoadingOnScroll] = useState(false);
@@ -11,6 +11,7 @@ function AvengerProvider(props) {
   const [error, setError] = useState(null);
   const [offset, setOffset] = useState(0);
 
+  
   //this effect acts as componentDidMount
   useEffect(() => {
     fetchData()
@@ -31,7 +32,7 @@ function AvengerProvider(props) {
           throw new Error(error);
         }
       );
-  }, [avengers, offset]);
+  }, []);
   //this effect fetches data only when isLoadingOnScroll=true
   useEffect(() => {
     if (isLoadingOnScroll)
