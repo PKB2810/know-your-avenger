@@ -48,10 +48,6 @@ class AvengerInfoComponent extends React.Component {
           </Modal>
         </section>
       );
-    } else {
-      return (
-        <section>Click on any of the Avengers for further details.</section>
-      );
     }
   }
 }
