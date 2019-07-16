@@ -35,8 +35,7 @@ function AvengerProvider(props) {
       const response = await fetch(
         API_URL + '?apikey=' + API_KEY + '&offset=' + offset
       );
-      const jsonResponse = await response.json();
-      const result = await jsonResponse;
+      const result =   response.json();
       if (result.code === 200) {
           setData(result);
          } else {
