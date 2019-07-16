@@ -14,30 +14,20 @@ function AvengerProvider(props) {
 
   //this effect acts as componentDidMount
   useEffect(() => {
-    fetchData().then(result => {
-      console.log(result);
-      if (result.code === 200) {
-        setData(result);
-      } else {
-        setError(result.code + ':' + result.status);
-      }
-    });
+    const callFetchData = async() => {
+      fetchData();
+    }
+    callFetchData();
   }, []);
   //this effect fetches data only when isLoadingOnScroll=true
   useEffect(() => {
-    if (isLoadingOnScroll)
-      fetchData(offset).then(
-        result => {
-          if (result.code === 200) {
-           setData(result);
-          } else {
-            setError(result.code + ':' + result.status);
-          }
-        },
-        error => {
-          setError(error);
-        }
-      );
+    const callFetchDataOnScroll = async() => {
+      if (isLoadingOnScroll){
+         fetchData(offset);
+      }
+    }
+    callFetchDataOnScroll();
+    
   }, [isLoadingOnScroll, offset]);
 
   async function fetchData(offset = 0) {
@@ -46,9 +36,14 @@ function AvengerProvider(props) {
         API_URL + '?apikey=' + API_KEY + '&offset=' + offset
       );
       const jsonResponse = await response.json();
-      return jsonResponse;
+      const result = await jsonResponse;
+      if (result.code === 200) {
+          setData(result);
+         } else {
+           setError(result.code + ':' + result.status);
+         }  
     } catch (error) {
-      throw new Error(error);
+      setError(error);
     }
   }
 
