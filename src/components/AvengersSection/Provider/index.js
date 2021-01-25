@@ -11,51 +11,47 @@ function AvengerProvider(props) {
   const [error, setError] = useState(null);
   const [offset, setOffset] = useState(0);
 
+
   //this effect acts as componentDidMount
   useEffect(() => {
-    fetchData()
-      .then(res => res.json())
-      .then(
-        result => {
-          console.log(result);
-          if (result.code === 200) {
-            setIsLoadingOnScroll(false);
-            setAvengers(avengers => avengers.concat(result.data.results));
-            setIsLoading(false);
-            setOffset(offset => offset + result.data.limit);
-          } else {
-            setError(result.code + ':' + result.status);
-          }
-        },
-        error => {
-          throw new Error(error);
-        }
-      );
+    const callFetchData = async() => {
+      fetchData();
+    }
+    callFetchData();
   }, []);
   //this effect fetches data only when isLoadingOnScroll=true
   useEffect(() => {
-    if (isLoadingOnScroll)
-      fetchData(offset)
-        .then(res => res.json())
-        .then(
-          result => {
-            if (result.code === 200) {
-              setIsLoadingOnScroll(false);
-              setAvengers(avengers => avengers.concat(result.data.results));
-              setIsLoading(false);
-              setOffset(offset => offset + result.data.limit);
-            } else {
-              setError(result.code + ':' + result.status);
-            }
-          },
-          error => {
-            setError(error);
-          }
-        );
-  }, [isLoadingOnScroll]);
+    const callFetchDataOnScroll = async() => {
+      if (isLoadingOnScroll){
+         fetchData(offset);
+      }
+    }
+    callFetchDataOnScroll();
+    
+  }, [isLoadingOnScroll, offset]);
 
-  function fetchData(offset = 0) {
-    return fetch(API_URL + '?apikey=' + API_KEY + '&offset=' + offset);
+  async function fetchData(offset = 0) {
+    try {
+      const response = await fetch(
+        API_URL + '?apikey=' + API_KEY + '&offset=' + offset
+      );
+      const result =   response.json();
+      if (result.code === 200) {
+          setData(result);
+         } else {
+           setError(result.code + ':' + result.status);
+         }  
+    } catch (error) {
+      setError(error);
+    }
+  }
+
+  function setData(result){
+
+    setIsLoadingOnScroll(false);
+    setAvengers(avengers => avengers.concat(result.data.results));
+    setIsLoading(false);
+    setOffset(offset => offset + result.data.limit);
   }
 
   function fetchDataOnScroll(e) {
